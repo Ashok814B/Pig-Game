@@ -63,5 +63,7 @@ btnhold.addEventListener('click', function () {
   //2.check
 
   //
+
+  //
   switchplayer();
 });
