@@ -13,15 +13,31 @@ const btnnew = document.querySelector('.btn--new');
 const btnroll = document.querySelector('.btn--roll');
 const btnhold = document.querySelector('.btn--hold');
 
-const scores = [0, 0];
-let currentscore = 0;
-let active = 0;
-let playing = true;
+//All the required startuing varaibles are required here
+let scores, currentscore, active, playing;
 
-//starting conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
+// starting initializing funtioninit() function
+const init = function () {
+  scores = [0, 0];
+  currentscore = 0;
+  playing = true;
+  playing = true;
+  active = 0;
+  diceEl.classList.add('hidden');
+
+  currentscore = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--winner');
+};
+
+init();
 
 const switchplayer = function () {
   currentscore = 0;
@@ -47,18 +63,12 @@ btnroll.addEventListener('click', function () {
       currentscore += dice;
       document.getElementById(`current--${active}`).textContent = currentscore;
     } else {
-      //
-      // currentscore = 0;
-      // document.getElementById(`current--${active}`).textContent = 0;
-      // active = active === 0 ? 1 : 0;
-      // player0El.classList.toggle('player--active');
-      // player1El.classList.toggle('player--active');
-
       switchplayer();
     }
   }
 });
 
+//hold functionality
 btnhold.addEventListener('click', function () {
   if (playing) {
     //1.Add current score to active players score
@@ -83,26 +93,5 @@ btnhold.addEventListener('click', function () {
 });
 
 btnnew.addEventListener('click', function () {
-  //resetting all the scores current, score;
-  currentscore = 0;
-  current0El.textContent = 0;
-  current1El.textContent = 0;
-  score0El.textContent = 0;
-  score1El.textContent = 0;
-
-  //setting the state variable to true for playing
-  playing = true;
-
-  //resetting the score array to zeros;
-  scores[0] = 0;
-  scores[1] = 0;
-
-  //removing winner player black color and setting active player white color
-  document
-    .querySelector(`.player--${active}`)
-    .classList.remove('player--winner');
-  document.querySelector(`.player--0`).classList.add('player--active');
-
-  //changing active player to 0
-  active = 0;
+  init();
 });
